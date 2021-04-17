@@ -18,7 +18,7 @@ function App() {
           <Nav className="mr-auto">
             <NavLink href="/useState">useState</NavLink>
             <NavLink href="/useEffect">useEffect</NavLink>
-            <NavLink href="/useReducer">useReducer</NavLink>
+            <NavLink href="/useContext">useContext</NavLink>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -37,7 +37,7 @@ function App() {
         />
         <Route
           exact
-          path="/useReducer"
+          path="/useContext"
           component={FinishedTwoButtons}
         />
      </Switch>
