@@ -1,25 +1,31 @@
-import logo from './logo.svg';
 import './App.scss';
-import { Nav, Navbar, NavLink, Container } from '@edx/paragon'
-import { Switch, Route, BrowserRouter } from 'react-router-dom'
+import React, { useState } from 'react';
+import { Nav, Navbar, Container, Form } from '@edx/paragon'
+import { Switch, Route, BrowserRouter, Link } from 'react-router-dom'
 import FinishedStatefulButton from './finished/StatefulButton';
 import FinishedGhibliMovies from './finished/GhibliMovies';
 import FinishedTwoButtons from './finished/TwoButtons'
-
-
+import TwoButtons from './toDo/TwoButtons';
+import GhibliMovies from './toDo/GhibliMovies';
+import StatefulButton from './toDo/StatefulButton';
 
 function App() {
+  const [showFinished, setShowFinished] = useState(false);
+
   return (
     <BrowserRouter>
-    <Container >
+    <Container>
       <Navbar>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <NavLink href="/useState">useState</NavLink>
-            <NavLink href="/useEffect">useEffect</NavLink>
-            <NavLink href="/useContext">useContext</NavLink>
+            <Link className='nav-link' to="/useState">useState</Link>
+            <Link className='nav-link' to="/useEffect">useEffect</Link>
+            <Link className='nav-link' to="/useContext">useContext</Link>
           </Nav>
+          <Form.Switch checked={showFinished} onChange={() => setShowFinished(!showFinished)}>
+            Show finished components
+          </Form.Switch>
         </Navbar.Collapse>
       </Navbar>
     </Container>
@@ -28,17 +34,17 @@ function App() {
         <Route
           exact
           path="/useState"
-          component={FinishedStatefulButton}
+          component={showFinished ? FinishedStatefulButton : StatefulButton}
         />
         <Route
           exact
           path="/useEffect"
-          component={FinishedGhibliMovies}
+          component={showFinished ? FinishedGhibliMovies : GhibliMovies}
         />
         <Route
           exact
           path="/useContext"
-          component={FinishedTwoButtons}
+          component={showFinished ? FinishedTwoButtons : TwoButtons}
         />
      </Switch>
      </Container>

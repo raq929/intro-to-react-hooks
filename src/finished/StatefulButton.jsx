@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Button, ButtonGroup} from '@edx/paragon'
+import { Button } from '@edx/paragon'
 
 
 const StatefulButton = () => {
