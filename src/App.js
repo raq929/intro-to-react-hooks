@@ -11,7 +11,7 @@ import FinishedTwoButtons from './finished/TwoButtons'
 function App() {
   return (
     <BrowserRouter>
-    <div className="app">
+    <Container >
       <Navbar>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -22,26 +22,26 @@ function App() {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Container size='xl'>
+    </Container>
+    <Container size='xl'>
       <Switch>
         <Route
           exact
           path="/useState"
-          render={FinishedStatefulButton}
+          component={FinishedStatefulButton}
         />
         <Route
           exact
           path="/useEffect"
-          render={FinishedGhibliMovies}
+          component={FinishedGhibliMovies}
         />
         <Route
           exact
           path="/useReducer"
-          render={FinishedTwoButtons}
+          component={FinishedTwoButtons}
         />
      </Switch>
      </Container>
-    </div>
     </BrowserRouter>
   );
 }
