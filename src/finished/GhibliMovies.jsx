@@ -1,12 +1,13 @@
-import { DataTable } from '@edx/paragon';
 import React,  {useState, useEffect} from 'react';
 import GhibliApiService from '../services/ghibliApi';
+import { MovieTable } from '../helperComponents';
 
+// eslint-disable-next-line no-unused-vars
 const GhibliMovies = () => {
-  const [movies, setMovies] = useState([])
+  const [movies, setMovies] = useState([]);
   useEffect(() => {
     let mounted = true
-    GhibliApiService.getList().then((data) => {
+    GhibliApiService.getMovieList().then((data) => {
       if(mounted) {
         setMovies(data)
         console.log(data)
@@ -18,30 +19,36 @@ const GhibliMovies = () => {
   return (
     <>
       <h1>useEffect</h1>
-
-      <DataTable
-        data={movies}
-        columns={[
-          {Header: 'Title',
-          accessor:'title'},
-          {
-            Header: 'Director',
-            accessor: 'director',
-          },{
-            Header: 'Release date',
-            accessor: 'release_date',
-          }
-        ]}
-        itemCount={movies.length}
-        isPaginated
-        isSortable
-        initialState={{
-          pageSize: 10,
-          pageIndex: 0
-        }}
-      />
+      <MovieTable movies={movies} />
     </>
   )
 };
 
-export default GhibliMovies
+// custom hook (takes the above code and creates a custom hook from it)
+const useMovies = () => {
+  const [movies, setMovies] = useState([]);
+  useEffect(() => {
+    let mounted = true
+    GhibliApiService.getMovieList().then((data) => {
+      if(mounted) {
+        setMovies(data)
+      }
+      return () => mounted = false;
+    })
+  },[])
+  return movies
+}
+
+const GhibliMoviesWithCustomHook = () => {
+  const movies = useMovies();
+
+  return (
+    <>
+      <h1>useEffect</h1>
+      <MovieTable movies={movies} />
+    </>
+  )
+}
+
+
+export default GhibliMoviesWithCustomHook

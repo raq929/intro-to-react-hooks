@@ -8,6 +8,7 @@ import FinishedTwoButtons from './finished/TwoButtons'
 import TwoButtons from './toDo/TwoButtons';
 import GhibliMovies from './toDo/GhibliMovies';
 import StatefulButton from './toDo/StatefulButton';
+import UsefulLinks from './UsefulLinks';
 
 function App() {
   const [showFinished, setShowFinished] = useState(false);
@@ -31,6 +32,11 @@ function App() {
     </Container>
     <Container size='xl'>
       <Switch>
+        <Route
+          exact
+          path="/"
+          component={UsefulLinks}
+        />
         <Route
           exact
           path="/useState"
