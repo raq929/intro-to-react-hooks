@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {Button} from '@edx/paragon';
 
-/* INSTRUCTIONS
+/* INSTRUCTIONS for useState
     Using the `useState` hook, create a button that increments a counter and displays the current button count
 
     BONUS:

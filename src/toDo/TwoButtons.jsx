@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Button } from '@edx/paragon'
 
-/* INSTRUCTIONS
+/* INSTRUCTIONS for useContext
   Implement two components that consume the ClickContext:
     - ContextButton
       - should increment the count when clicked

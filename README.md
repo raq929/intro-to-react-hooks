@@ -1,6 +1,20 @@
-# Getting Started with Create React App
+# Intro to hooks
+
+This app is meant to be used in a workshop for teaching react hooks.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Getting started
+
+To get the app up and running, run:
+```
+npm install
+npm start
+```
+
+This should start a server on localhost:3000.
+
+The components we will be writing are in the ToDo directory.
 
 ## Available Scripts
 
