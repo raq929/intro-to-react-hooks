@@ -88,9 +88,9 @@ You can also do fun things like rename variables that were based on array keys o
 Open up your app (by running `npm run start` if you haven't already), and let's learn about hooks.
 
 ### More resources
-- (useState)[https://reactjs.org/docs/hooks-state.html]
-- (useEffect)[https://reactjs.org/docs/hooks-effect.html]
-- (useContext)[https://daveceddia.com/usecontext-hook/]
+- [useState](https://reactjs.org/docs/hooks-state.html)
+- [useEffect](https://reactjs.org/docs/hooks-effect.html)
+- [useContext](https://daveceddia.com/usecontext-hook/)
 
 ## Available Scripts
 
