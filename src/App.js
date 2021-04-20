@@ -2,13 +2,14 @@ import './App.scss';
 import React, { useState } from 'react';
 import { Nav, Navbar, Container, Form } from '@edx/paragon'
 import { Switch, Route, BrowserRouter, Link } from 'react-router-dom'
-import FinishedStatefulButton from './finished/StatefulButton';
 import FinishedGhibliMovies from './finished/GhibliMovies';
 import FinishedTwoButtons from './finished/TwoButtons'
+import FinishedKittenVotes from './finished/KittenVotes';
 import TwoButtons from './toDo/TwoButtons';
 import GhibliMovies from './toDo/GhibliMovies';
-import StatefulButton from './toDo/StatefulButton';
-import UsefulLinks from './UsefulLinks';
+import KittenVotes from './toDo/KittenVotes';
+import MainPage from './MainPage';
+
 
 function App() {
   const [showFinished, setShowFinished] = useState(false);
@@ -35,12 +36,12 @@ function App() {
         <Route
           exact
           path="/"
-          component={UsefulLinks}
+          component={MainPage}
         />
         <Route
           exact
           path="/useState"
-          component={showFinished ? FinishedStatefulButton : StatefulButton}
+          component={showFinished ? FinishedKittenVotes : KittenVotes}
         />
         <Route
           exact

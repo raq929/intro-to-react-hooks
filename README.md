@@ -1,6 +1,6 @@
 # Intro to hooks
 
-This app is meant to be used as a workshop for teaching react hooks. Worshop content is below, excercises can be done by running the app.
+This app is meant to be used as a workshop for teaching react hooks. Workshop content is below, excercises can be done by running the app.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

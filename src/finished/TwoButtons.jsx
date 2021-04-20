@@ -11,7 +11,7 @@ const ClickContextProvider = ({ children }) => {
 const ContextButton = ({ text, className }) => {
   const [count, setCount] = useContext(ClickContext);
 
-  return <Button className={className} onClick={() => setCount(count + 1)}>{text}</Button>
+  return <Button className={className} onClick={() => setCount((prevCount) => prevCount + 1)}>{text}</Button>
 }
 
 const ClickReport = () => {
