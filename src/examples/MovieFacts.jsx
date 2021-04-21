@@ -4,7 +4,8 @@ import { Card} from '@edx/paragon';
 
 
 const GhibliMovieCard = () => {
-  const [movie, setMovie] = useState([]);
+  const [movie, setMovie] = useState({});
+
   useEffect(() => {
     let mounted = true
     GhibliApiService.getMovie("12cfb892-aac0-4c5b-94af-521852e46d6a").then((data) => {
@@ -12,9 +13,10 @@ const GhibliMovieCard = () => {
         setMovie(data)
         console.log(data)
       }
-      return () => mounted = false;
     })
+    return () => mounted = false;
   },[])
+
   const { title, director } = movie;
   return (
     <div className="mb-5">

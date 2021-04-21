@@ -21,6 +21,7 @@ function App() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
+            <Link className='nav-link' to="/">Home</Link>
             <Link className='nav-link' to="/useState">useState</Link>
             <Link className='nav-link' to="/useEffect">useEffect</Link>
             <Link className='nav-link' to="/useContext">useContext</Link>

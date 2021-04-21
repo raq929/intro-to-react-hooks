@@ -1,6 +1,6 @@
 import React from 'react';
-import StatefulButton from './finished/StatefulButton';
-import GhibliMovieCard from './finished/MovieFacts';
+import StatefulButton from './examples/StatefulButton';
+import GhibliMovieCard from './examples/MovieFacts';
 import UsefulLinks from './UsefulLinks';
 
 const MainPage = () => {
