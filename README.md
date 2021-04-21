@@ -166,14 +166,15 @@ If we're creating a context that keeps track of the number of cookies I've eaten
 
 ### The context provider
 The context provider is the component that holds whatever values you need it to and makes them available to it's child components.
-My cookie context is going to provide a getter and setter for my cookie count to various components. It's a special type of React component that returns a Provider that is part of the CookieContext.
+My cookie context is going to provide a getter and setter for my cookie count to various components. It's a special type of React component that returns a Provider that is part of the CookieContext. It takes a `value` prop. This value can be any value that you want the children to have
+access to. In this case, we're just going to pass the values we got from `useState`.
 
-```
+```javascript
 const CookieProvider = ({ children }) => {
   const [cookieCount, setCookieCount] = useState(0)
 
   return (
-    <CookieContext.Provider value=[cookieCount, setCookieCount]>
+    <CookieContext.Provider value={[cookieCount, setCookieCount]}>
       {children}
     </CookieContext.Provider>
   )
@@ -182,7 +183,7 @@ const CookieProvider = ({ children }) => {
 
 ### Consuming context
 To use the context, children must use the `useContext` hook. So, a component that reports the cookie count might look like:
-```
+```javascript
 const CookieNumber = () => {
   const [cookieCount] = useContext(CookieContext)
   return <div>I ate {cookieCount} cookies!</div>
