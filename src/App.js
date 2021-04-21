@@ -16,9 +16,9 @@ function App() {
 
   return (
     <BrowserRouter>
-    <Container>
       <Navbar>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Container size="xl">
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <Link className='nav-link' to="/">Home</Link>
@@ -30,8 +30,8 @@ function App() {
             Show finished components
           </Form.Switch>
         </Navbar.Collapse>
+        </Container>
       </Navbar>
-    </Container>
     <Container size='xl'>
       <Switch>
         <Route
