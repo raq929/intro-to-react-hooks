@@ -5,7 +5,7 @@ class GhibliApiService {
 
   static getMovieList = () => fetch(GhibliApiService.baseUrl).then(data => data.json())
 
-  static getMovie = (id) => fetch(`${GhibliApiService.baseUrl}/${id}`).then(data => data.json())
+  static getMovie = (id) => fetch(`${GhibliApiService.baseUrl}${id}`).then(data => data.json())
 }
 
 export default GhibliApiService
