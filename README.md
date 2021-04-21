@@ -51,7 +51,9 @@ You can also do fun things like rename variables that were based on array keys o
 ## [useState](https://reactjs.org/docs/hooks-state.html)
 
 This hook does what it says on the tin, it adds state to a previously stateless component.
-Before hooks, we would have had to convert a functional component that needed state into a class component. Now, we can use this hook.
+Suppose I have a component that contains a button, now I want to keep track of how many times that button has been clicked.
+
+Before hooks, we would have had to convert the button component that needed state into a class component. Now, we can use the `useState` hook.
 
 ### Where to use it
 
