@@ -21,6 +21,65 @@ The components we will be writing are in the toDo directory.
 In the past, functional components in React could take props and manipulate them, but were otherwise fairly limited.
 React hooks allow function components to have state, to use side effects, and become first-class citizens.
 
+## Destructuring syntax
+
+This is a syntax you'll see a lot in hooks documentation and usage
+
+### Array destructuring
+```javascript
+const answersArr = ['Yeah', 'Nah']
+const [yes, no] = answersArr
+
+// equivalent to
+const yes = answersArr[0]
+const no = answersArr[1]
+```
+
+### Object destructuring
+```javascript
+const fruitCounts = { apples: 2, bananas: 10 }
+const { apples, bananas } = fruitCounts
+
+// equivalent to
+const apples = fruitCounts.apples
+const bananas = fruitCounts.bananas
+```
+
+You can also do fun things like rename variables that were based on array keys or set defaults for variables that are undefined.
+[MDN docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
+
+## [useState](https://reactjs.org/docs/hooks-state.html)
+
+This hook does what it says on the tin, it adds state to a previously stateless component.
+Before hooks, we would have had to convert a functional component that needed state into a class component. Now, we can use this hook.
+
+### Where to use it
+
+Any functional component that needs to preserve some state through rerenders.
+`useState` can be called multiple times in one function, and is generally used multiple times rather than using an object as you might in a
+class component. When this becomes unwieldy, I often turn to `useReducer`.
+
+### Arguments
+
+`useState` takes one argument, an initial state. That initial state can be of any type; a string, a number, an object, and array, etc.
+
+### Return value
+
+`useState` returns an array of two values: first, the current state, and second, a setter that can set the next state.
+Usually, destructuring syntax is used to give these values useful names, i.e. `[dogName, setDogName] = useState('Fluffy')` would give us a
+variable `dogName` which would initially be set to `'Fluffy'`, and a function, `setDogName` that can be used to change the value of `dogName`.
+
+`setDogName` can take either a value, which will set the state to that value when the component rerenders, or a function, which receives the
+previous state, so that that state can be used to set the new value.
+
+So if I want to change the dog's name directly, I would call `setState('Floofster')`, but if I need to keep track of the previous value, I
+would use `setState((prevDogName) => prevDogName + 'Jr.')`.
+
+### Exercise
+
+Open up your app (by running `npm run start` if you haven't already), and let's complete the `useState` example.
+The file to work on is `src/toDo/KittenVotes.jsx`.
+
 ### Hooks are functions
 
 At the end of the day, hooks are just functions. Any hook that returns a function is a closure over a function that you write. The closure
@@ -57,40 +116,81 @@ You can still use hooks without knowing what's under there.
 - [About how closure are used](https://www.netlify.com/blog/2019/03/11/deep-dive-how-do-react-hooks-really-work/)
 - [About the data structure backing hooks](https://the-guild.dev/blog/react-hooks-system)
 
-## Destructuring syntax
 
-This is a syntax you'll see a lot in hooks documentation and usage
+## [useEffect](https://reactjs.org/docs/hooks-effect.html)
 
-### Array destructuring
-```javascript
-const answersArr = ['Yeah', 'Nah']
-const [yes, no] = answersArr
+Suppose we need our component to make an API call in order to set it's state? That's where `useEffect` comes in handy.
 
-// equivalent to
-const yes = answersArr[0]
-const no = answersArr[1]
+### Where to use it
+
+When your component needs side effects to happen on mount or on update.
+
+### Arguments
+
+`useEffect` takes two arguments, a function that will be run when the component mounts, and an array of values, which tells React when (or if) the function should be run when the component updates.
+
+#### The function argument
+
+The function that is passed to `useEffect` can do any side effect. The most common usage that I've seen for calling an API and setting state as a
+result of that API call.
+
+##### Cleanup
+
+Optionally, the function you pass to useEffect can return a cleanup function. This is very similar to something that might get run on `componentWillUnmount`. So, if you're calling an API, it might prevent the API from setting state after the component is unmounted. If you
+have subscribed to a service, it might unsubscribe you.
+
+#### The array argument
+
+This is an array of values, and if any one of the values in the array changes, React will call the function you passed to `useEffect`. If you
+only want the effect to run on mount, you can pass it an empty array. If there are props or state which affect your `useEffect` function, you can add them to the array, and the function you passed to `useEffect` will be called if the component updates and one of those values changed, similar to logic you might put in `componentDidUpdate`.
+
+### Return value
+`useEffect` has no return value.
+
+### Exercise
+The code for the example is in `src/examples/MovieFacts.jsx`.
+The code for you to finish is in `src/toDo/GhibliMovies.jsx`.
+
+## [useContext](https://daveceddia.com/usecontext-hook/)
+What if I had some state in one component, but I now want to share it accross multiple components or multiple parts of my app?
+This is where `useContext` becomes useful. Instead of moving state up the component tree and drilling down props, we can move state into a
+context and access it via the `useContext` hook.
+
+So, if I want to create an app where on one page I report the amount of cookies I've eaten, and on another page I can click on cookies to add to
+the cookie count, I could wrap both components in a context provider and use the `useContext` hook to access the shared state.
+
+### Creating context
+A context is created using `React.createContext()`.
+If we're creating a context that keeps track of the number of cookies I've eaten, I could create it like so:
+`const CookieContext = React.createContext()`.
+
+### The context provider
+The context provider is the component that holds whatever values you need it to and makes them available to it's child components.
+My cookie context is going to provide a getter and setter for my cookie count to various components. It's a special type of React component that returns a Provider that is part of the CookieContext.
+
+```
+const CookieProvider = ({ children }) => {
+  const [cookieCount, setCookieCount] = useState(0)
+
+  return (
+    <CookieContext.Provider value=[cookieCount, setCookieCount]>
+      {children}
+    </CookieContext.Provider>
+  )
+}
 ```
 
-### Object destructuring
-```javascript
-const fruitCounts = { apples: 2, bananas: 10 }
-const { apples, bananas } = fruitCounts
-
-// equivalent to
-const apples = fruitCounts.apples
-const bananas = fruitCounts.bananas
+### Consuming context
+To use the context, children must use the `useContext` hook. So, a component that reports the cookie count might look like:
+```
+const CookieNumber = () => {
+  const [cookieCount] = useContext(CookieContext)
+  return <div>I ate {cookieCount} cookies!</div>
+}
 ```
 
-You can also do fun things like rename variables that were based on array keys or set defaults for variables that are undefined.
-[MDN docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
-
-## Hooks!
-Open up your app (by running `npm run start` if you haven't already), and let's learn about hooks.
-
-### More resources
-- [useState](https://reactjs.org/docs/hooks-state.html)
-- [useEffect](https://reactjs.org/docs/hooks-effect.html)
-- [useContext](https://daveceddia.com/usecontext-hook/)
+### Code-Along
+We'll do a context example together. It's in `src/toDo/TwoButtons.jsx`.
 
 ## Available Scripts
 
