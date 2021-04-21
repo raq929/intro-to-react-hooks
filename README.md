@@ -4,6 +4,9 @@ This app is meant to be used as a workshop for teaching react hooks. Workshop co
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Prerequisites
+Some experience with React. You should know about the component lifecycle, lifecycle methods, etc.
+
 ## Getting started
 
 To get the app up and running, run:
@@ -36,6 +39,8 @@ const no = answersArr[1]
 ```
 
 ### Object destructuring
+In object destructuring, the name of the variable being assigned to must be the same as the key of the object.
+
 ```javascript
 const fruitCounts = { apples: 2, bananas: 10 }
 const { apples, bananas } = fruitCounts
