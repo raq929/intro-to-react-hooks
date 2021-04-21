@@ -4,6 +4,7 @@ import { Card, Button, CardGrid} from '@edx/paragon';
 /* INSTRUCTIONS for useState
     Using the `useState` hook, create a buttons that increment each kitten's vote count
     Display the vote counts.
+    Remember that useState can be called more than once!
 
     BONUS:
       - Add a button that clears the count
