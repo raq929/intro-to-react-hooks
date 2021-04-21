@@ -54,7 +54,7 @@ That persistent object is an array of "state cells" that store the values from t
 It can't just be an array, can it?? Well, no. Here are some resources that will give you a deeper dive into hooks.
 You can still use hooks without knowing what's under there.
 
-- [About how closurse are used](https://www.netlify.com/blog/2019/03/11/deep-dive-how-do-react-hooks-really-work/)
+- [About how closure are used](https://www.netlify.com/blog/2019/03/11/deep-dive-how-do-react-hooks-really-work/)
 - [About the data structure backing hooks](https://the-guild.dev/blog/react-hooks-system)
 
 ## Destructuring syntax
