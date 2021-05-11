@@ -5,9 +5,13 @@ import { Switch, Route, BrowserRouter, Link } from 'react-router-dom'
 import FinishedGhibliMovies from './finished/GhibliMovies';
 import FinishedTwoButtons from './finished/TwoButtons'
 import FinishedKittenVotes from './finished/KittenVotes';
+import FinishedStatefulButton from './finished/StatefulButton';
+
 import TwoButtons from './toDo/TwoButtons';
 import GhibliMovies from './toDo/GhibliMovies';
 import KittenVotes from './toDo/KittenVotes';
+import StatefulButton from './toDo/StatefulButton';
+
 import MainPage from './MainPage';
 
 
@@ -25,6 +29,8 @@ function App() {
             <Link className='nav-link' to="/useState">useState</Link>
             <Link className='nav-link' to="/useEffect">useEffect</Link>
             <Link className='nav-link' to="/useContext">useContext</Link>
+            <Link className ='nav-link' to="/useStateButton">useStateButton</Link> 
+
           </Nav>
           <Form.Switch checked={showFinished} onChange={() => setShowFinished(!showFinished)}>
             Show finished components
@@ -53,6 +59,11 @@ function App() {
           exact
           path="/useContext"
           component={showFinished ? FinishedTwoButtons : TwoButtons}
+        />
+        <Route
+          exact
+          path="/useStateButton"
+          component={showFinished ? FinishedStatefulButton : StatefulButton}
         />
      </Switch>
      </Container>

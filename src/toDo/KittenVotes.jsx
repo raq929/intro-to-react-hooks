@@ -12,13 +12,14 @@ import { Card, Button, CardGrid} from '@edx/paragon';
 */
 
 const KittenVotes = () => {
-
+    const [meow, meowClicks] = useState(0);
+    const [princess, princessClicks] = useState(0);
 
   return (
     <>
       <h1>useState</h1>
-      <div className="py-3">Meowser was clicked 0 times!</div>
-      <div className="py-3">Princess Purr was clicked 0 times!</div>
+      <div className="py-3">Meowser was clicked {meow} times!</div>
+      <div className="py-3">Princess Purr was clicked {princess} times!</div>
       {/* Display vote counts here */}
       <CardGrid>
         <Card style={{ width: '18rem' }}>
@@ -30,6 +31,7 @@ const KittenVotes = () => {
               Vote for Meowser!
             </Card.Text>
             {/* Meowser button here */}
+            <Button variant = "primary" onClick={() => meowClicks((prevClick) => prevClick + 1)}>Meow</Button>
           </Card.Body>
         </Card>
         <Card style={{ width: '18rem' }}>
@@ -40,6 +42,8 @@ const KittenVotes = () => {
               Vote for Princess Purr!
             </Card.Text>
             {/* Princess Purr button here */}
+            <Button onClick = {() => princessClicks((prevClick)=> prevClick + 1)}>Princess</Button>
+
           </Card.Body>
         </Card>
       </CardGrid>
