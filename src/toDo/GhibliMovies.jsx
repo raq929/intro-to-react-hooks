@@ -18,16 +18,55 @@ import { MovieTable } from '../helperComponents';
 */
 
 
-
 const GhibliMovies = () => {
   const [movies, setMovies] = useState([]);
-
+  useEffect(() => {
+    GhibliApiService.getMovieList().then((data) => {
+    setMovies(data);
+    
+    })
+  }, [])
   return (
     <>
       <h1>useEffect</h1>
       <MovieTable movies={movies} />
+      </>
+  )
+}
+
+const usePictures = () => {
+  const [pics, setPics] = useState([]);
+  const [count, setCount] = useState(0);
+  const [countInTimeout, setCountInTimeout] = useState(0);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      console.log('This will run after 5 second!')
+      setCountInTimeout(count); // count is 0 here
+        GhibliApiService.getMovieList().then((data)=>{
+        setPics(data)
+            
+    }, 5000);
+    setCount(5);
+    console.log("count: " +count)
+    console.log("setTimeout count: " + countInTimeout)
+    return () => clearTimeout(timer);
+    
+    })
+  },[])
+  return pics
+}
+const GhiblicustomHook = () => {
+  
+
+  return (
+    <>
+      <h1> useMovies - Custom Hook</h1>
+      <MovieTable movies = {usePictures()} />
+
+     
     </>
   )
-};
+}
 
-export default GhibliMovies;
+
+export default GhiblicustomHook
